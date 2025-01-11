@@ -75,7 +75,7 @@ export FZF_BASE=/usr/bin/fzf
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
+alias tunip="echo $(ifconfig tun0 | head -n 2 | tail -n 1 | awk '{ print $2 }')"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -103,3 +103,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 eval "$(starship init zsh)"
+eval `ssh-agent -s` > /dev/null
