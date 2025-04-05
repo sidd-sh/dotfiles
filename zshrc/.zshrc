@@ -75,6 +75,7 @@ export FZF_BASE=/usr/bin/fzf
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+alias gen-payload="python3 /opt/gen-payload/main.py"
 alias tunip="echo $(ifconfig tun0 2>/dev/null | head -n 2 | tail -n 1 | awk '{ print $2 }')"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -104,3 +105,7 @@ alias tunip="echo $(ifconfig tun0 2>/dev/null | head -n 2 | tail -n 1 | awk '{ p
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 eval "$(starship init zsh)"
 eval `ssh-agent -s` > /dev/null
+
+# Created by `pipx` on 2025-03-02 00:53:48
+export PATH="$PATH:/home/kali/.local/bin"
+export PATH=$HOME/.local/bin:$PATH
