@@ -46,7 +46,7 @@ alias tunip="echo $(ifconfig tun0 2>/dev/null | head -n 2 | tail -n 1 | awk '{ p
 alias vim="nvim"
 alias pyt="ptipython"
 
-eval `ssh-agent -s` > /dev/null
+#eval `ssh-agent -s` > /dev/null
 # search history using Up and Down keys
 # >>> up arrow | down arrow
 bindkey "^[[A" history-beginning-search-backward
@@ -105,3 +105,9 @@ setopt HIST_IGNORE_DUPS
 # Created by `pipx` on 2025-03-02 00:53:48
 export PATH="$PATH:/home/kali/.local/bin"
 export PATH=$HOME/.local/bin:$PATH
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
