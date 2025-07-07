@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="spaceship"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git zsh-autosuggestions tmux fzf asdf)
 export FZF_BASE=/usr/bin/fzf
@@ -45,6 +45,8 @@ alias gen-payload="python3 /opt/gen-payload/main.py"
 alias tunip="echo $(ifconfig tun0 2>/dev/null | head -n 2 | tail -n 1 | awk '{ print $2 }')"
 alias vim="nvim"
 alias pyt="ptipython"
+alias ls="exa"
+alias cat="batcat"
 
 #eval `ssh-agent -s` > /dev/null
 # search history using Up and Down keys
@@ -101,13 +103,10 @@ setopt HIST_IGNORE_SPACE
 # ignore recording duplicate consecutive commands in the history
 setopt HIST_IGNORE_DUPS
 
+# Add prev function for pet
+function prev() {
+  PREV=$(fc -lrn | head -n 1)
+  sh -c "pet new `printf %q "$PREV"`"
+}
 
-# Created by `pipx` on 2025-03-02 00:53:48
-export PATH="$PATH:/home/kali/.local/bin"
-export PATH=$HOME/.local/bin:$PATH
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+eval "$(zoxide init zsh)"
