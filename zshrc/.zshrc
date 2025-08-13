@@ -9,13 +9,13 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git zsh-autosuggestions tmux fzf asdf)
+plugins=(zsh-autosuggestions fzf)
 export FZF_BASE=/usr/bin/fzf
 
 source $ZSH/oh-my-zsh.sh
 
 # python cli
-export PATH="$PATH:$HOME/.venv/bin:$HOME/.local/bin"
+export PATH="$PATH:/usr/sbin:/usr/local/sbin:$HOME/.venv/bin:$HOME/.local/bin"
 
 # colorize "kubectl diff" command outputs
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
@@ -42,20 +42,17 @@ export FZF_CTRL_T_COMMAND="fd --exclude .git --ignore-file $HOME/.oh-my-zsh/cust
 # CTRL + T: put the file content if item select is a file, or put tree command output if item selected is directory
 export FZF_CTRL_T_OPTS="--preview '[ -d {} ] && tree -C {} || bat --color=always --style=numbers {}'"
 
-# add Rust binaries to the PATH
-export PATH="$PATH:$HOME/.cargo/bin"
-
 # add Go binaries to the PATH
 export PATH="$PATH:$HOME/go/bin"
 
 # User configuration
 alias gen-payload="python3 /opt/gen-payload/main.py"
-alias tunip="echo $(ifconfig tun0 2>/dev/null | head -n 2 | tail -n 1 | awk '{ print $2 }')"
+alias tunip="echo $(ip a sh dev tun0 2>/dev/null| rg -e "(10[\.\d]+)" -o | head -n1)"
 alias vim="nvim"
 alias pyt="ptipython"
 alias ls="exa"
-alias cat="batcat"
-
+alias cat="batcat --paging=never -p"
+alias manspider="docker run --rm -v ./manspider:/root/.manspider blacklanternsecurity/manspider"
 #eval `ssh-agent -s` > /dev/null
 # search history using Up and Down keys
 # >>> up arrow | down arrow
@@ -119,8 +116,12 @@ function prev() {
 
 eval "$(zoxide init zsh)"
 . "$HOME/.cargo/env"
-
-export PATH="${PATH}:/home/sid/.cargo/bin"
-
+export PYTHONWARNINGS="ignore"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
