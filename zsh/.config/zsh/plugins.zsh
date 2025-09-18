@@ -1,12 +1,12 @@
 # Oh My Zsh (let OMZ run compinit; don’t double-run it)
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Let OMZ manage these plugins where possible; keep syntax-highlighting LAST.
 plugins=(
   git
   fzf
   zsh-autosuggestions
-  # zsh-syntax-highlighting    # we'll source manually at the very end in post.zsh
+  zsh-syntax-highlighting    # we'll source manually at the very end in post.zsh
 )
 
 source "$ZSH/oh-my-zsh.sh"
